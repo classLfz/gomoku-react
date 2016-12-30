@@ -18,7 +18,9 @@
   "homepage": "https://github.com/classLfz/learn-react#readme",
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

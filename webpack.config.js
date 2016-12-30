@@ -1,9 +1,9 @@
 module.exports = {
   entry: [
-    './components/App.js',
+    './src/index.js',
   ],
   output: {
-    filename: 'app.js',
+    filename: 'bundle.js',
     publicPath: '/static/'
   },
   module: {
