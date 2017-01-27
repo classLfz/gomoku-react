@@ -1,5 +1,7 @@
 # Gomoku-React
 
+[查看在线例子](https://classlfz.github.io/gomoku-react/)
+
 使用React.js来编写的一个简易的网页版五子棋小游戏。
 
 ## 开发
@@ -21,6 +23,4 @@
 
 `webpack-dev-server`
 
-## 查看
-
-访问：[localhost:8080](http://localhost:8080)
+本地访问：[localhost:8080](http://localhost:8080)
