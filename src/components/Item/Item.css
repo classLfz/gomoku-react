@@ -1,0 +1,66 @@
+.item {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #ff802f;
+}
+
+.itemCorner {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #c6bc3f;
+}
+
+.itemEdge {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #474c7e;
+}
+
+.itemPoint {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #b6004d;
+}
+
+.itemBlack {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: #2f2e2f;
+}
+
+.itemWhite {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: #e8e8e8;
+  cursor: pointer;
+}
+
+.spanNone {
+  display: none;
+}
+
+.spanBlack {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.spanWhite {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: white;
+}

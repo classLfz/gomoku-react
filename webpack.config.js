@@ -13,6 +13,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader?presets[]=es2015&presets[]=react'
       },
+      {
+        test: /\.css$/,
+        loader: "style!css?modules&localIdentName=[local]-[hash:base64:5]"
+      }
     ]
   }
 }

@@ -1,17 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 
-import App from './App';
-import reducer from './reducers/reducer';
-
-// store
-const store = createStore(reducer);
+import Gomoku from './components/Gomoku';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <div>
+    <Gomoku />
+  </div>,
   document.getElementById('app')
 );
