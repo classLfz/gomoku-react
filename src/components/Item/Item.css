@@ -1,25 +1,82 @@
-.item {
+.itemNormal {
   display: inline-block;
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background-color: #ff802f;
+  background-image: url(../../images/bg.png);
+  background-position: -40px -40px;
 }
 
-.itemCorner {
+.itemLeftTop {
   display: inline-block;
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background-color: #c6bc3f;
+  background-image: url(../../images/bg.png);
+  background-position: -10px -10px;
 }
 
-.itemEdge {
+.itemRightTop {
   display: inline-block;
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background-color: #474c7e;
+  background-image: url(../../images/bg.png);
+  background-position: -130px -10px;
+}
+
+.itemRightBottom {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -130px -70px;
+}
+
+.itemLeftBottom {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -10px -70px;
+}
+
+.itemTop {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -40px -10px;
+}
+
+.itemRight {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -130px -40px;
+}
+
+.itemBottom {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -40px -70px;
+}
+
+.itemLeft {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -10px -40px;
 }
 
 .itemPoint {
@@ -27,22 +84,8 @@
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background-color: #b6004d;
-}
-
-.itemBlack {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  background-color: #2f2e2f;
-}
-
-.itemWhite {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  background-color: #e8e8e8;
-  cursor: pointer;
+  background-image: url(../../images/bg.png);
+  background-position: -100px -40px;
 }
 
 .spanNone {
@@ -55,6 +98,7 @@
   height: 100%;
   border-radius: 50%;
   background-color: black;
+  box-shadow: .01rem .01rem .1rem rgba(0, 0, 0, .5), 0 0 .05rem rgba(240, 240, 240, .5), .05rem .05rem .01rem rgba(255, 255, 255, .15) inset, .1rem .1rem .1rem rgba(255, 255, 255, .05) inset, -.05rem -.05rem .25rem rgba(0, 0, 0, .15) inset, -.1rem -.1rem .35rem rgba(0, 0, 0, .05) inset;
 }
 
 .spanWhite {
@@ -63,4 +107,5 @@
   height: 100%;
   border-radius: 50%;
   background-color: white;
+  box-shadow: .01rem .01rem .1rem rgba(0, 0, 0, .5), 0 0 .05rem rgba(240, 240, 240, .5), .05rem .05rem .01rem rgba(255, 255, 255, .15) inset, .1rem .1rem .1rem rgba(255, 255, 255, .05) inset, -.05rem -.05rem .25rem rgba(0, 0, 0, .15) inset, -.1rem -.1rem .35rem rgba(0, 0, 0, .05) inset;
 }
