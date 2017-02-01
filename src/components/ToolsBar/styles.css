@@ -1,0 +1,27 @@
+.toolsBar {
+  min-width: 80px;
+  line-height: 50px;
+  margin-left: 8px;
+}
+
+.toolsBar * {
+  margin: 0;
+}
+
+.select {
+  border: solid 1px #000;
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  padding-right: 14px;
+}
+
+.btn {
+  width: 80px;
+  height: 40px;
+  outline: none;
+  background: #4b71e3;
+  border: none;
+  color: #ffffff;
+  border-radius: 3px;
+}

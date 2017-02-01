@@ -15,14 +15,3 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.btn {
-  width: 80px;
-  height: 40px;
-  outline: none;
-  background: #cecece;
-  border: none;
-  color: #292929;
-  border-radius: 3px;
-  margin-right: 8px;
-}

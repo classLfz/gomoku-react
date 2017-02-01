@@ -2,12 +2,13 @@ import React from 'react';
 
 // components
 import ItemList from './ItemList/ItemList';
-import Toolbar from './Toolbar/Toolbar';
+import Header from './Header/Header';
+import StatusBar from './StatusBar/StatusBar';
+import ToolsBar from './ToolsBar/ToolsBar';
 import Helper from './Helper';
 
 // styles
 import styles from './Gomoku.css';
-
 
 class Gomoku extends React.Component {
   constructor(props) {
@@ -18,12 +19,20 @@ class Gomoku extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.restart = this.restart.bind(this);
+    this.handleModelChange = this.handleModelChange.bind(this);
+    this.handleFirstChange = this.handleFirstChange.bind(this);
 
     // 初始化状态
     let listArray = this.initListArray();
     this.state = {
       listArray: listArray,
-      activeUser: 'black'
+      activeUser: 'black',
+      model: 'pve',
+      first: 'human',
+      nextStatus: {
+        model: 'pve',
+        first: 'human'
+      }
     }
   }
 
@@ -33,7 +42,6 @@ class Gomoku extends React.Component {
       let subList = new Array;
       for (var j = 0; j < 19; j++) {
         let piece = {
-          id: j,
           piece: 'none'
         };
         subList.push(piece);
@@ -49,19 +57,24 @@ class Gomoku extends React.Component {
     let y = event.y;
     let active = this.state.activeUser;
 
-    // 修改阵列
-    let newListArray = this.state.listArray;
-    newListArray[x][y]['piece'] = this.state.activeUser;
-    this.setState({
-      listArray: newListArray
-    });
+    this.play(x, y, active);
 
     this.justice(x, y);
 
     // 交换棋权
-    let newActiveUser = this.state.activeUser === 'black' ? 'white' : 'black';
+    let newActiveUser = active === 'black' ? 'white' : 'black';
     this.setState({
       activeUser: newActiveUser
+    });
+  }
+
+  // 下棋
+  play(x, y, active) {
+    let newListArray = this.state.listArray;
+    newListArray[x][y]['piece'] = active;
+
+    this.setState({
+      listArray: newListArray
     });
   }
 
@@ -85,16 +98,41 @@ class Gomoku extends React.Component {
     }
   }
 
-  // 重新开始游戏
+  // 开始游戏
   restart() {
+    // 重置阵列
     let listArray = this.initListArray();
-
     this.setState({
       listArray: listArray,
       activeUser: 'black'
     });
 
+    // 设置状态
+    let nextStatus = this.state.nextStatus;
+    this.setState({
+       model: nextStatus['model'],
+       first: nextStatus['first']
+    });
+
     window.isOver = false;
+  }
+
+  handleModelChange(status) {
+    let newStatus = this.state.nextStatus;
+    newStatus['model'] = status;
+
+    this.setState({
+      nextStatus: newStatus
+    });
+  }
+
+  handleFirstChange(status) {
+    let newStatus = this.state.nextStatus;
+    newStatus['first'] = status;
+
+    this.setState({
+      nextStatus: newStatus
+    });
   }
 
   render() {
@@ -105,8 +143,19 @@ class Gomoku extends React.Component {
     );
     return (
       <div className={styles.container}>
-        <Toolbar activeUser={this.state.activeUser} onRestart={this.restart}/>
-        {itemList}
+        <Header activeUser={this.state.activeUser}/>
+        <div className={styles.main}>
+          <StatusBar
+            model={this.state.model}
+            first={this.state.first}/>
+          <div className={styles.chessboard}>
+            {itemList}
+          </div>
+          <ToolsBar
+            onRestart={this.restart}
+            onModelChange={this.handleModelChange}
+            onFirstChange={this.handleFirstChange}/>
+        </div>
       </div>
     );
   }

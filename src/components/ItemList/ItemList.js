@@ -17,7 +17,7 @@ export default class ItemList extends React.Component {
 
   render() {
     const list = this.props.list.map((item, index) =>
-      <div key={item.id} className={styles.list}>
+      <div key={index} className={styles.list}>
         <Item
           piece={item.piece}
           listNumber={this.props.listNumber}
