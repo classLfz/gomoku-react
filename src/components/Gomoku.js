@@ -5,7 +5,10 @@ import ItemList from './ItemList/ItemList';
 import Header from './Header/Header';
 import StatusBar from './StatusBar/StatusBar';
 import ToolsBar from './ToolsBar/ToolsBar';
-import Helper from './Helper';
+import Justicer from './Justicer';
+
+// AI
+import Footprint from './Footprint';
 
 // styles
 import styles from './Gomoku.css';
@@ -56,16 +59,27 @@ class Gomoku extends React.Component {
     let x = event.x;
     let y = event.y;
     let active = this.state.activeUser;
+    const model = this.state.model;
+    const first = this.state.first;
+
+    // 判断是否为AI下棋期间
+    if (model === 'pve') {
+      if (first === 'human' && active === 'white') {
+        return;
+      }
+
+      if (first === 'computer' && active === 'black') {
+        return;
+      }
+    }
 
     this.play(x, y, active);
 
-    this.justice(x, y);
-
-    // 交换棋权
-    let newActiveUser = active === 'black' ? 'white' : 'black';
-    this.setState({
-      activeUser: newActiveUser
-    });
+    if (model === 'pve' && !window.isOver) {
+      let newActiveUser = this.state.activeUser === 'black' ? 'white': 'black';
+      let {x, y} = Footprint(this.state.listArray, newActiveUser);
+      this.play(x, y, newActiveUser);
+    }
   }
 
   // 下棋
@@ -75,6 +89,14 @@ class Gomoku extends React.Component {
 
     this.setState({
       listArray: newListArray
+    }, function() {
+      this.justice(x, y);
+
+      // 交换棋权
+      let newActiveUser = active === 'black' ? 'white' : 'black';
+      this.setState({
+        activeUser: newActiveUser
+      });
     });
   }
 
@@ -83,7 +105,7 @@ class Gomoku extends React.Component {
     let activeUser = this.state.activeUser;
     let listArray = this.state.listArray;
 
-    let isWin = Helper.justicer(
+    let isWin = Justicer(
       {
         x: x,
         y: y
@@ -105,16 +127,16 @@ class Gomoku extends React.Component {
     this.setState({
       listArray: listArray,
       activeUser: 'black'
+    }, function() {
+      // 设置状态
+      let nextStatus = this.state.nextStatus;
+      this.setState({
+        model: nextStatus['model'],
+        first: nextStatus['first']
+      }, function() {
+        window.isOver = false;
+      });
     });
-
-    // 设置状态
-    let nextStatus = this.state.nextStatus;
-    this.setState({
-       model: nextStatus['model'],
-       first: nextStatus['first']
-    });
-
-    window.isOver = false;
   }
 
   handleModelChange(status) {
