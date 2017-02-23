@@ -2,6 +2,7 @@ module.exports = {
   entry: [
     './src/index.js',
   ],
+  devtool: 'source-map',
   output: {
     filename: 'bundle.js',
     publicPath: '/static/'
@@ -20,7 +21,7 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         loader: 'url-loader?limit=8192'
-      } 
+      }
     ]
   }
 }

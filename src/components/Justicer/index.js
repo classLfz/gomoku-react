@@ -5,7 +5,7 @@ export default function(coordinate, piece, list) {
   // 0度角
   count = justiceXL(x, y, piece, list, count);
   count = justiceXR(x, y, piece, list, count);
-  if (count > 4) {
+  if (count >= 4) {
     return true;
   }
 
@@ -13,7 +13,7 @@ export default function(coordinate, piece, list) {
   // 45度角
   count = justiceXYLL(x, y, piece, list, count);
   count = justiceXYLR(x, y, piece, list, count);
-  if (count > 4) {
+  if (count >= 4) {
     return true;
   }
 
@@ -21,7 +21,7 @@ export default function(coordinate, piece, list) {
   // 90度角
   count = justiceYT(x, y, piece, list, count);
   count = justiceYB(x, y, piece, list, count);
-  if (count > 4) {
+  if (count >= 4) {
     return true;
   }
 
@@ -29,7 +29,7 @@ export default function(coordinate, piece, list) {
   // 135度角
   count = justiceXYRR(x, y, piece, list, count);
   count = justiceXYRL(x, y, piece, list, count);
-  if (count > 4) {
+  if (count >= 4) {
     return true;
   }
 

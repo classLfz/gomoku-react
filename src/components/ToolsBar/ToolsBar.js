@@ -7,23 +7,16 @@ export default class ToolsBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleModelChange = this.handleModelChange.bind(this);
-    this.handleFirstChange = this.handleFirstChange.bind(this);
     this.restart = this.restart.bind(this);
   }
 
-  handleModelChange(event) {
-    this.props.onModelChange(event.target.value);
-    event.preventDefault();
-  }
-
-  handleFirstChange(event) {
-    this.props.onFirstChange(event.target.value);
-    event.preventDefault();
-  }
-
   restart(event) {
-    this.props.onRestart();
+    const model = this.refs.modelSelect.value;
+    const first = this.refs.firstSelect.value;
+    this.props.onRestart({
+      model: model,
+      first: first
+    });
     event.preventDefault();
   }
 
@@ -33,9 +26,8 @@ export default class ToolsBar extends React.Component {
         <div>
           <h3>模式：</h3>
           <select
-            className={styles.select}
-            value={this.props.model}
-            onChange={this.handleModelChange}>
+            ref="modelSelect"
+            className={styles.select}>
             <option value="pve">人机对战</option>
             <option value="pvp">双人对战</option>
           </select>
@@ -44,9 +36,8 @@ export default class ToolsBar extends React.Component {
         <div>
           <h3>先手：</h3>
           <select
-            className={styles.select}
-            value={this.props.first}
-            onChange={this.handleFirstChange}>
+            ref="firstSelect"
+            className={styles.select}>
             <option value="human">玩家先行</option>
             <option value="computer">电脑先行</option>
           </select>
