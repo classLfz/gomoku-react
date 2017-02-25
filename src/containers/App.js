@@ -10,6 +10,9 @@ import { initGame, playGame } from '../actions';
 // styles
 import styles from './App.css';
 
+// AI
+import Footprint from '../components/Footprint';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,12 +20,34 @@ class App extends Component {
     this.play = this.play.bind(this);
   }
 
+  // 下棋，派遣修改gameState
   play(coord) {
     const { dispatch } = this.props;
     if (isOver) {
       return;
     }
     return dispatch(playGame(coord));
+  }
+
+  // 每次重新渲染以后，判断是否需要ai下棋
+  componentDidUpdate() {
+    if (window.isOver) {
+      return;
+    }
+    const { dispatch, gameState } = this.props;
+    const model = gameState.model;
+    const first = gameState.first;
+    const activeUser = gameState.activeUser;
+    const listArray = gameState.listArray;
+    if (model === 'pvp') {
+      return;
+    }
+    const isAiRound = ((first === 'human' && activeUser === 'white') || (first === 'computer' && activeUser === 'black'));
+    if (isAiRound) {
+      // ai下棋
+      let coord = Footprint(listArray, activeUser);
+      return dispatch(playGame(coord));
+    }
   }
 
   render() {
@@ -51,10 +76,14 @@ class App extends Component {
   }
 }
 
-// App.PropTypes = {
-//   model: PropTypes.string.isRequired,
-//   first: PropTypes.string.isRequired
-// };
+App.PropTypes = {
+  gameState: PropTypes.objectOf(PropTypes.shape({
+    listArray: PropTypes.arrayOf(PropTypes.array).isRequired,
+    model: PropTypes.string.isRequired,
+    first: PropTypes.string.isRequired,
+    activeUser: PropTypes.string.isRequired
+  })).isRequired
+};
 
 function mapStateToProps(state) {
   return {

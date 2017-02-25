@@ -1,7 +1,9 @@
 export default function(list, activeUser) {
+  let pieceCount = 0;
   for (let i = 0; i < list.length; i++) {
     for (let j = 0; j < list[i].length; j++) {
       if (list[i][j]['piece'] === 'none') {
+        pieceCount++;
         // 进攻分数计算
         // 水平
         let count = 0;
@@ -62,12 +64,19 @@ export default function(list, activeUser) {
     }
   }
 
+  // 先手第一步棋
+  if (pieceCount === 361) {
+    return {
+      x: 9,
+      y: 9
+    };
+  }
+
   let scoreTop = 0;
   let x = 0,
       y = 0;
   for (let k = 0; k < list.length; k++) {
     for (let l = 0; l < list[k].length; l++) {
-      // console.log(k, l);
       if (list[k][l]['piece'] === 'none') {
         if (list[k][l]['attackScore'] >= scoreTop) {
           scoreTop = list[k][l]['attackScore'];

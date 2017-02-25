@@ -8,7 +8,7 @@ import Justicer from '../components/Justicer';
 let initialGameState = {
   listArray: initialListArray(),
   activeUser: 'black',
-  model: 'pvp',
+  model: 'pve',
   first: 'human'
 };
 
