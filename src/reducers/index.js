@@ -56,6 +56,7 @@ function justice(state, coord) {
 function init(state, nextStatus) {
   state.model = nextStatus.model;
   state.first = nextStatus.first;
+  state.activeUser = 'black';
   state.listArray = initialListArray();
   window.isOver = false;
   return state;

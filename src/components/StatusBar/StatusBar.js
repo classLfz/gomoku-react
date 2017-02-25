@@ -9,6 +9,21 @@ export default class StatusBar extends React.Component {
   }
 
   render() {
+    const model = this.props.model;
+    if (model === 'pvp') {
+      const itemClass = this.props.activeUser === 'black' ? styles.black : styles.white;
+
+      return (
+        <div className={styles.statusBar}>
+          <h3>无禁手</h3>
+
+          <div className={styles.players}>
+            下棋方：
+            <div className={itemClass}></div>
+          </div>
+        </div>
+      )
+    }
     const humanClass = this.props.first === 'human' ? styles.black : styles.white;
     const computerClass = this.props.first === 'computer' ? styles.black : styles.white;
 

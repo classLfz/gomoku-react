@@ -11,7 +11,7 @@ import { initGame, playGame } from '../actions';
 import styles from './App.css';
 
 // AI
-import Footprint from '../components/Footprint';
+import Footprint from './Footprint';
 
 class App extends Component {
   constructor(props) {
@@ -65,7 +65,9 @@ class App extends Component {
         <div className={styles.main}>
           <StatusBar
             model={gameState.model}
-            first={gameState.first}/>
+            first={gameState.first}
+            activeUser={gameState.activeUser}
+            />
           <div className={styles.chessboard}>
             {itemList}
           </div>
