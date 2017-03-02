@@ -5,61 +5,11 @@ export default function(list, activeUser) {
       if (list[i][j]['piece'] === 'none') {
         pieceCount++;
         // 进攻分数计算
-        // 水平
-        let count = 0;
-        count = justiceXL(i, j, activeUser, list, count);
-        count = justiceXR(i, j, activeUser, list, count);
-
-        let score = countScore(count);
-        // 45度角
-        count = 0;
-        count = justiceXYLL(i, j, activeUser, list, count);
-        count = justiceXYLR(i, j, activeUser, list, count);
-        score = score > countScore(count) ? score : countScore(count);
-
-        // 90度角
-        count = 0;
-        count = justiceYT(i, j, activeUser, list, count);
-        count = justiceYB(i, j, activeUser, list, count);
-        score = score > countScore(count) ? score : countScore(count);
-
-        //135度角
-        count = 0;
-        count = justiceXYRR(i, j, activeUser, list, count);
-        count = justiceXYRL(i, j, activeUser, list, count);
-        score = score > countScore(count) ? score : countScore(count);
-
-        list[i][j]['attackScore'] = score;
+        list[i][j]['attackScore'] = counter(i, j, activeUser, list);
 
         // 防守分数计算
         let enemy = activeUser === 'black' ? 'white': 'black';
-        // console.log(enemy);
-        // 水平
-        score = 0;
-        count = 0;
-        count = justiceXL(i, j, enemy, list, count);
-        count = justiceXR(i, j, enemy, list, count);
-        score = score > countScore(count) ? score : countScore(count + 1);
-
-        // 45度角
-        count = 0;
-        count = justiceXYLL(i, j, enemy, list, count);
-        count = justiceXYLR(i, j, enemy, list, count);
-        score = score > countScore(count) ? score : countScore(count + 1);
-
-        // 90度角
-        count = 0;
-        count = justiceYT(i, j, enemy, list, count);
-        count = justiceYB(i, j, enemy, list, count);
-        score = score > countScore(count) ? score : countScore(count + 1);
-
-        // 135度角
-        count = 0;
-        count = justiceXYRR(i, j, enemy, list, count);
-        count = justiceXYRL(i, j, enemy, list, count);
-        score = score > countScore(count) ? score : countScore(count + 1);
-
-        list[i][j]['defendScore'] = score;
+        list[i][j]['defendScore'] = counter(i, j, enemy, list);
       }
     }
   }
@@ -97,6 +47,35 @@ export default function(list, activeUser) {
     x: x,
     y: y
   };
+}
+
+// 统计所有分数，并返回数组
+function counter(x, y, active, list) {
+  let count = 0;
+  let score = 0;
+  count = justiceXL(x, y, active, list, count);
+  count = justiceXR(x, y, active, list, count);
+  score = score > countScore(count) ? score : countScore(count + 1);
+
+  // 45度角
+  count = 0;
+  count = justiceXYLL(x, y, active, list, count);
+  count = justiceXYLR(x, y, active, list, count);
+  score = score > countScore(count) ? score : countScore(count + 1);
+
+  // 90度角
+  count = 0;
+  count = justiceYT(x, y, active, list, count);
+  count = justiceYB(x, y, active, list, count);
+  score = score > countScore(count) ? score : countScore(count + 1);
+
+  // 135度角
+  count = 0;
+  count = justiceXYRR(x, y, active, list, count);
+  count = justiceXYRL(x, y, active, list, count);
+  score = score > countScore(count) ? score : countScore(count + 1);
+
+  return score;
 }
 
 // 计算分数
