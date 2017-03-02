@@ -5,11 +5,11 @@ export default function(list, activeUser) {
       if (list[i][j]['piece'] === 'none') {
         pieceCount++;
         // 进攻分数计算
-        list[i][j]['attackScore'] = counter(i, j, activeUser, list);
+        list[i][j]['attackCounts'] = counter(i, j, activeUser, list);
 
         // 防守分数计算
         let enemy = activeUser === 'black' ? 'white': 'black';
-        list[i][j]['defendScore'] = counter(i, j, enemy, list);
+        list[i][j]['defendCounts'] = counter(i, j, enemy, list);
       }
     }
   }
@@ -22,20 +22,43 @@ export default function(list, activeUser) {
     };
   }
 
-  let scoreTop = 0;
+  let countTop = 0;
+  let topTime = 0;
   let x = 0,
       y = 0;
   for (let k = 0; k < list.length; k++) {
     for (let l = 0; l < list[k].length; l++) {
       if (list[k][l]['piece'] === 'none') {
-        if (list[k][l]['attackScore'] >= scoreTop) {
-          scoreTop = list[k][l]['attackScore'];
+        // 进攻评分
+        let attackCountTop = list[k][l]['attackCounts']['countTop'];
+        let attackCountRepeat = list[k][l]['attackCounts']['countRepeat'];
+        if (attackCountTop > countTop) {
+          countTop = attackCountTop;
+          topTime = attackCountRepeat;
           x = k;
           y = l;
         }
 
-        if (list[k][l]['defendScore'] >= scoreTop) {
-          scoreTop = list[k][l]['defendScore'];
+        if (attackCountTop === countTop && attackCountRepeat > topTime) {
+          countTop = attackCountTop;
+          topTime = attackCountRepeat;
+          x = k;
+          y = l;
+        }
+
+        // 防守评分
+        let defendCountTop = list[k][l]['defendCounts']['countTop'];
+        let defendCountRepeat = list[k][l]['defendCounts']['countRepeat'];
+        if (defendCountTop > countTop) {
+          countTop = defendCountTop;
+          topTime = defendCountRepeat;
+          x = k;
+          y = l;
+        }
+
+        if (defendCountTop === countTop && defendCountRepeat > topTime) {
+          countTop = defendCountTop;
+          topTime = defendCountRepeat;
           x = k;
           y = l;
         }
@@ -52,36 +75,42 @@ export default function(list, activeUser) {
 // 统计所有分数，并返回数组
 function counter(x, y, active, list) {
   let count = 0;
-  let score = 0;
   count = justiceXL(x, y, active, list, count);
   count = justiceXR(x, y, active, list, count);
-  score = score > countScore(count) ? score : countScore(count + 1);
+  let horizontal = count;
 
   // 45度角
   count = 0;
   count = justiceXYLL(x, y, active, list, count);
   count = justiceXYLR(x, y, active, list, count);
-  score = score > countScore(count) ? score : countScore(count + 1);
+  let leftBevel = count;
 
   // 90度角
   count = 0;
   count = justiceYT(x, y, active, list, count);
   count = justiceYB(x, y, active, list, count);
-  score = score > countScore(count) ? score : countScore(count + 1);
+  let vertical = count;
 
   // 135度角
   count = 0;
   count = justiceXYRR(x, y, active, list, count);
   count = justiceXYRL(x, y, active, list, count);
-  score = score > countScore(count) ? score : countScore(count + 1);
+  let rightBevel = count;
 
-  return score;
-}
+  let countArr = [horizontal, leftBevel, vertical, rightBevel];
+  let countTop = 0;
+  let countRepeat = 0;
+  for (let count of countArr) {
+    if (count >= countTop) {
+      countTop = count;
+      countRepeat++;
+    }
+  }
 
-// 计算分数
-function countScore(count) {
-  let scores = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-  return scores[count];
+  return {
+    countTop: countTop,
+    countRepeat: countRepeat
+  };
 }
 
 // 水平左
