@@ -12,7 +12,7 @@ export default class Header extends React.Component {
         <h1>Gomoku</h1>
 
         <div className={styles.tools}>
-          <h3>当前：{this.props.activeUser === 'white' ? '白棋' : '黑棋'}</h3>
+          <h3>Made by classlfz</h3>
         </div>
       </div>
     );
