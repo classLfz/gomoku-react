@@ -6,3 +6,6 @@ npm-debug.log
 static
 bundle.js
 bundle.js.map
+
+#vscode
+.vscode
