@@ -9,8 +9,8 @@ export default class StatusBar extends React.Component {
   }
 
   render() {
-    const model = this.props.model;
-    if (model === 'pvp') {
+    const mode = this.props.mode;
+    if (mode === 'pvp') {
       const itemClass = this.props.activeUser === 'black' ? styles.black : styles.white;
 
       return (

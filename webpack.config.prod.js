@@ -1,11 +1,14 @@
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: [
     './src/index.js',
   ],
   devtool: 'source-map',
   output: {
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     loaders:[
@@ -23,5 +26,10 @@ module.exports = {
         loader: 'url-loader?limit=8192'
       }
     ]
-  }
-}
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './index.html', to: '.' }
+    ])
+  ]
+};

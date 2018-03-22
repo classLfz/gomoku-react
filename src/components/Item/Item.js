@@ -9,10 +9,6 @@ export default class Item extends React.Component {
   }
 
   handleClick(event) {
-    if (window.isOver) {
-      return;
-    }
-
     if (this.props.piece !== 'none') {
       return;
     }

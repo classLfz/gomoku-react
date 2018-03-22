@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  font-family: 'Microsoft YaHei', 'Verdana', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .main {
   width: 100%;
@@ -11,4 +12,5 @@
 
 .chessboard {
   display: flex;
+  position: relative;
 }

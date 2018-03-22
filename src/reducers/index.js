@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { INIT_GAME, PLAY_GAME } from '../actions';
+import {
+  INIT_GAME,
+  PLAY_GAME,
+  END_GAME
+} from '../actions';
 
 import Justicer from '../components/Justicer';
 
@@ -8,8 +12,10 @@ import Justicer from '../components/Justicer';
 let initialGameState = {
   listArray: initialListArray(),
   activeUser: 'black',
-  model: 'pve',
-  first: 'human'
+  mode: 'pve',
+  first: 'human',
+  winner: '',
+  gameOver: false
 };
 
 // 初始化数组
@@ -41,24 +47,25 @@ function play(state, coord) {
 
 // 判断输赢
 function justice(state, coord) {
-  let isWin = Justicer({
+  let gameOver = Justicer({
     x: coord.x,
     y: coord.y
   }, state.activeUser, state.listArray);
 
-  if (isWin) {
-    alert(`游戏结束！胜利方为${state.activeUser}！`);
-    window.isOver = true;
-  }
+  return {
+    gameOver: gameOver,
+    winner: state.activeUser
+  };
 }
 
 // 初始化
 function init(state, nextStatus) {
-  state.model = nextStatus.model;
+  state.mode = nextStatus.mode;
   state.first = nextStatus.first;
   state.activeUser = 'black';
   state.listArray = initialListArray();
-  window.isOver = false;
+  state.gameOver = false;
+  state.winner = '';
   return state;
 }
 
@@ -70,8 +77,16 @@ function gameState(state = initialGameState, action) {
       return newState;
       break;
     case PLAY_GAME:
-      justice(newState, action.coord);
+      let result = justice(newState, action.coord);
+      if (result.gameOver) {
+        newState.gameOver = result.gameOver;
+        newState.winner = result.winner;
+      }
       newState = play(newState, action.coord);
+      return newState;
+      break;
+    case END_GAME:
+      newState.gameOver = true;
       return newState;
       break;
     default:

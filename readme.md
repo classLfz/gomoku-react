@@ -14,14 +14,36 @@
 
 全局依赖：
 
-`npm install webpack webpack-dev-server -g`
+`npm install yarn webpack webpack-dev-server -g`
 
 ### 项目依赖
 
-`npm install`
+```
+npm install
+
+#or
+
+yarn
+```
 
 ## 开启项目
 
-`webpack-dev-server --inline`
+```
+npm run dev 
+
+#or
+
+yarn dev
+```
+
+## 项目打包
+
+```
+npm run build
+
+#or
+
+yarn build
+```
 
 本地访问：[localhost:8080](http://localhost:8080)

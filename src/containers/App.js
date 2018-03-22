@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import ItemList from '../components/ItemList/ItemList';
 import StatusBar from '../components/StatusBar/StatusBar';
 import ToolsBar from '../components/ToolsBar/ToolsBar';
+import Notification from '../components/Notification/Notification';
 
 import { initGame, playGame } from '../actions';
 
@@ -16,34 +17,27 @@ import Footprint from './Footprint';
 class App extends Component {
   constructor(props) {
     super(props);
-    window.isOver = false;
     this.play = this.play.bind(this);
   }
 
   // 下棋，派遣修改gameState
   play(coord) {
     const { dispatch } = this.props;
-    if (isOver) {
-      return;
-    }
     return dispatch(playGame(coord));
   }
 
   // 每次重新渲染以后，判断是否需要ai下棋
   componentDidUpdate() {
-    if (window.isOver) {
-      return;
-    }
     const { dispatch, gameState } = this.props;
-    const model = gameState.model;
+    const mode = gameState.mode;
     const first = gameState.first;
     const activeUser = gameState.activeUser;
     const listArray = gameState.listArray;
-    if (model === 'pvp') {
+    if (mode === 'pvp') {
       return;
     }
     const isAiRound = ((first === 'human' && activeUser === 'white') || (first === 'computer' && activeUser === 'black'));
-    if (isAiRound) {
+    if (isAiRound && !gameState.gameOver) {
       // ai下棋
       let coord = Footprint(listArray, activeUser);
       return dispatch(playGame(coord));
@@ -64,11 +58,12 @@ class App extends Component {
         <Header activeUser={gameState.activeUser}/>
         <div className={styles.main}>
           <StatusBar
-            model={gameState.model}
+            mode={gameState.mode}
             first={gameState.first}
             activeUser={gameState.activeUser}
             />
           <div className={styles.chessboard}>
+            <Notification gameOver={gameState.gameOver} winner={gameState.winner} />
             {itemList}
           </div>
           <ToolsBar onRestart={(nextStatus) => dispatch(initGame(nextStatus))}/>
@@ -77,15 +72,6 @@ class App extends Component {
     )
   }
 }
-
-App.PropTypes = {
-  gameState: PropTypes.objectOf(PropTypes.shape({
-    listArray: PropTypes.arrayOf(PropTypes.array).isRequired,
-    model: PropTypes.string.isRequired,
-    first: PropTypes.string.isRequired,
-    activeUser: PropTypes.string.isRequired
-  })).isRequired
-};
 
 function mapStateToProps(state) {
   return {

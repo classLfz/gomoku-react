@@ -4,8 +4,9 @@
   "description": "gomoku base on react.",
   "main": "webpack.config.js",
   "dependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0"
   },
@@ -21,7 +22,9 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config ./webpack.config.dev.js --inline",
+    "build": "webpack --config ./webpack.config.prod.js"
   },
   "author": "classlfz",
   "license": "ISC"

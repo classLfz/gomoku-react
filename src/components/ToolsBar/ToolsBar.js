@@ -10,11 +10,15 @@ export default class ToolsBar extends React.Component {
     this.restart = this.restart.bind(this);
   }
 
+  /**
+   * 重新开启游戏
+   * @param {Object} event 点击事件
+   */
   restart(event) {
-    const model = this.refs.modelSelect.value;
+    const mode = this.refs.modeSelect.value;
     const first = this.refs.firstSelect.value;
     this.props.onRestart({
-      model: model,
+      mode: mode,
       first: first
     });
     event.preventDefault();
@@ -26,7 +30,7 @@ export default class ToolsBar extends React.Component {
         <div>
           <h3>模式：</h3>
           <select
-            ref="modelSelect"
+            ref="modeSelect"
             className={styles.select}>
             <option value="pve">人机对战</option>
             <option value="pvp">双人对战</option>
