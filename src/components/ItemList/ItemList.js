@@ -2,7 +2,7 @@ import React from 'react';
 // components
 import Item from '../Item/Item';
 // styles
-import styles from './styles.css';
+import './styles.css';
 
 export default class ItemList extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class ItemList extends React.Component {
 
   render() {
     const list = this.props.list.map((item, index) =>
-      <div key={index} className={styles.list}>
+      <div key={index} className='list'>
         <Item
           piece={item.piece}
           listNumber={this.props.listNumber}

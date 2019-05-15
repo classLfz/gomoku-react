@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
 import ItemList from '../components/ItemList/ItemList';
@@ -9,7 +9,7 @@ import Notification from '../components/Notification/Notification';
 import { initGame, playGame } from '../actions';
 
 // styles
-import styles from './App.css';
+import './App.css';
 
 // AI
 import Footprint from './Footprint';
@@ -54,15 +54,15 @@ class App extends Component {
     );
 
     return (
-      <div className={styles.container}>
+      <div className='container'>
         <Header activeUser={gameState.activeUser}/>
-        <div className={styles.main}>
+        <div className='main'>
           <StatusBar
             mode={gameState.mode}
             first={gameState.first}
             activeUser={gameState.activeUser}
             />
-          <div className={styles.chessboard}>
+          <div className='chessboard'>
             <Notification gameOver={gameState.gameOver} winner={gameState.winner} />
             {itemList}
           </div>

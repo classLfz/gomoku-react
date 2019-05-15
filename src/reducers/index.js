@@ -20,9 +20,9 @@ let initialGameState = {
 
 // 初始化数组
 function initialListArray() {
-  let listArray = new Array;
+  let listArray = new Array(0);
   for (let i = 0; i < 19; i++) {
-    let subList = new Array;
+    let subList = new Array(0);
     for (var j = 0; j < 19; j++) {
       let piece = {
         piece: 'none'
@@ -75,7 +75,6 @@ function gameState(state = initialGameState, action) {
     case INIT_GAME:
       newState = init(newState, action.nextStatus);
       return newState;
-      break;
     case PLAY_GAME:
       let result = justice(newState, action.coord);
       if (result.gameOver) {
@@ -84,11 +83,9 @@ function gameState(state = initialGameState, action) {
       }
       newState = play(newState, action.coord);
       return newState;
-      break;
     case END_GAME:
       newState.gameOver = true;
       return newState;
-      break;
     default:
       return state;
   }

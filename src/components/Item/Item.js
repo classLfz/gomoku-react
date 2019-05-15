@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Item.css';
+import './Item.css';
 
 export default class Item extends React.Component {
   constructor(props) {
@@ -23,35 +23,35 @@ export default class Item extends React.Component {
   handleItemClassName(x, y) {
     // 左上角
     if (x === 0 && y === 0) {
-      return styles.itemLeftTop;
+      return 'itemLeftTop';
     }
     // 右上角
     if (x === 18 && y === 0) {
-      return styles.itemRightTop;
+      return 'itemRightTop';
     }
     // 右下角
     if (x === 18 && y === 18) {
-      return styles.itemRightBottom;
+      return 'itemRightBottom';
     }
     // 左下角
     if (x === 0 && y === 18) {
-      return styles.itemLeftBottom;
+      return 'itemLeftBottom';
     }
     // 上侧边
     if (y === 0) {
-      return styles.itemTop;
+      return 'itemTop';
     }
     // 右侧边
     if (x === 18) {
-      return styles.itemRight;
+      return 'itemRight';
     }
     // 下侧边
     if (y === 18) {
-      return styles.itemBottom;
+      return 'itemBottom';
     }
     // 左侧边
     if (x === 0) {
-      return styles.itemLeft;
+      return 'itemLeft';
     }
     // 指标位置
     if ((x === 9 && y === 9) ||
@@ -60,10 +60,10 @@ export default class Item extends React.Component {
         (x === 15 && (y === 9 || y === 15)) ||
         (x === 9 && y === 15)
       ) {
-      return styles.itemPoint;
+      return 'itemPoint';
     }
     // 其他
-    return styles.itemNormal;
+    return 'itemNormal';
   }
 
   render() {
@@ -77,11 +77,11 @@ export default class Item extends React.Component {
     itemClassName = this.handleItemClassName(x, y);
     // 棋子样式
     if (piece === 'none') {
-      spanClassName = styles.spanNone;
+      spanClassName = 'spanNone';
     } else if (piece === 'black') {
-      spanClassName = styles.spanBlack;
+      spanClassName = 'spanBlack';
     } else {
-      spanClassName = styles.spanWhite;
+      spanClassName = 'spanWhite';
     }
 
     return (

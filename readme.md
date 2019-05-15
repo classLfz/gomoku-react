@@ -10,40 +10,28 @@
 
 确认你已经安装好了`node.js`环境。
 
-### 依赖
-
-全局依赖：
-
-`npm install yarn webpack webpack-dev-server -g`
-
-### 项目依赖
+### 安装依赖
 
 ```
-npm install
-
-#or
-
 yarn
 ```
 
 ## 开启项目
 
 ```
-npm run dev 
+yarn start
+```
 
-#or
+## 语法检查
 
-yarn dev
+```
+yarn eject
 ```
 
 ## 项目打包
 
 ```
-npm run build
-
-#or
-
 yarn build
 ```
 
-本地访问：[localhost:8080](http://localhost:8080)
+本地访问：[localhost:3000](http://localhost:3000)

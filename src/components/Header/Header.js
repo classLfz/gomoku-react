@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styles from './styles.css';
+import './styles.css';
 
 import { endGame } from '../../actions';
 
@@ -25,11 +25,12 @@ class Header extends React.Component {
     if (this.state.count <= 0) {
       this.props.dispatch(endGame())
     }
-    this.state.countId = setTimeout(() => {
+    const countId = setTimeout(() => {
       let count = this.state.count - 1;
       this.setState({count: count});
       this.counting();
     }, 1000);
+    this.setState({countId: countId})
   }
 
   componentDidUpdate(prevProps) {
@@ -42,11 +43,11 @@ class Header extends React.Component {
   }
 
   render() {
-    const { activeUser, mode, gameOver } = this.props;
+    const { activeUser, gameOver } = this.props;
     const countdown = activeUser === 'black' ? '黑方' : '白方';
     let countdownEl;
     if (!gameOver) {
-      countdownEl = (<div className={this.state.count <= 10 ? styles.danger : ''}>
+      countdownEl = (<div className={this.state.count <= 10 ? 'danger' : ''}>
         <span>{countdown}</span>读秒：
         <span>
           {this.state.count}
@@ -56,10 +57,10 @@ class Header extends React.Component {
       countdownEl = (<span></span>);
     }
     return (
-      <div className={styles.toolbar}>
+      <div className='toolbar'>
         <h1>Gomoku</h1>
         {countdownEl}
-        <div className={styles.tools}>
+        <div className='tools'>
           <h3>Made by classlfz</h3>
         </div>
       </div>

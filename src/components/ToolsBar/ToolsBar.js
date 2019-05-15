@@ -1,7 +1,7 @@
 import React from 'react';
 
 // styles
-import styles from './styles.css';
+import './styles.css';
 
 export default class ToolsBar extends React.Component {
   constructor(props) {
@@ -26,12 +26,12 @@ export default class ToolsBar extends React.Component {
 
   render() {
     return (
-      <div className={styles.toolsBar}>
+      <div className='toolsBar'>
         <div>
           <h3>模式：</h3>
           <select
             ref="modeSelect"
-            className={styles.select}>
+            className='select'>
             <option value="pve">人机对战</option>
             <option value="pvp">双人对战</option>
           </select>
@@ -41,13 +41,13 @@ export default class ToolsBar extends React.Component {
           <h3>先手：</h3>
           <select
             ref="firstSelect"
-            className={styles.select}>
+            className='select'>
             <option value="human">玩家先行</option>
             <option value="computer">电脑先行</option>
           </select>
         </div>
 
-        <button className={styles.btn} onClick={this.restart}>开始游戏</button>
+        <button className='btn' onClick={this.restart}>开始游戏</button>
       </div>
     );
   }

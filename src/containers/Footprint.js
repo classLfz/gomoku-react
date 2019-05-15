@@ -35,7 +35,7 @@ export default function(list, activeUser) {
         let attackCountArr = list[k][l]['attackCounts']['countArr'];
         let defendCountTop = list[k][l]['defendCounts']['countTop'];
         let defendCountRepeat = list[k][l]['defendCounts']['countRepeat'];
-        let defendCountArr = list[k][l]['defendCounts']['countArr'];
+        // let defendCountArr = list[k][l]['defendCounts']['countArr'];
 
         // 进攻评分
         if (attackCountTop > countTop) {
@@ -121,7 +121,7 @@ function counter(x, y, active, list) {
     if (count > countTop) {
       countTop = count;
       countRepeat = 1;
-    } else if (count = countTop) {
+    } else if (count === countTop) {
       countRepeat++;
     }
   }
