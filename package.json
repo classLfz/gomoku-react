@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "homepage": "http://classlfz.github.io/gomoku-react",
   "author": "classlfz",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
